@@ -6,6 +6,10 @@ import (
 	"sync"
 )
 
+const (
+	lenWidth = 8
+)
+
 type store struct {
 	file *os.File
 	size int64

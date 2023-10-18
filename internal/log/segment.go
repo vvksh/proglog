@@ -1,37 +1,31 @@
 package log
 
 import (
-	"os"
-	"path"
+	api "github.com/vvksh/proglog/api/v1"
 )
 
 type segment struct {
-	s   *store
-	idx *index
+	initialOffset uint64
+	s             *store
+	idx           *index
+	Config
 }
 
-func newSegment(dir string) (*segment, error) {
+func newSegment(dir string, offset uint64, config Config) (*segment, error) {
 	//TODO
-	// scan directory, pick next number to name the segment eg: 1, 2, 3 etc
-	idx := "1"
-	storeFile, err := os.Create(path.Join(dir, idx, ".store"))
-	if err != nil {
-		return nil, err
-	}
-	idxFile, err := os.Create(path.Join(dir, idx, ".idx"))
-	if err != nil {
-		return nil, err
-	}
-	store, err := newStore(storeFile)
-	if err != nil {
-		return nil, err
-	}
-	store, err := newStore(storeFile)
-	if err != nil {
-		return nil, err
-	}
+	// - open a file and hold the file pointer for reading and appending
+	// - open and initialize the index file
+	return nil, nil
+}
 
-	return &segment{
+// Append adds a new record to the end of the store file and updates the corresponding index
+// Its up to the caller to check for size limit, can use IsMaxed method
+func (s *segment) Append(record *api.Record) error {
+	// TODO
+	return nil
+}
 
-	}
+func (s *segment) Read(offset uint64) (*api.Record, error) {
+	// TODO
+	return &api.Record{}, nil
 }
